@@ -2,13 +2,19 @@ package com.example.rest_with_spring_boot.data_vo_v1;
 
 import java.io.Serializable;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
 
 @JsonPropertyOrder({"id", "first_name", "last_name", "gender", "address"})
-public class PersonVO implements Serializable{
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable{
     private static final long SERIAL_VERSION_ID = 1L;
-    private long id;
+
+    @JsonProperty("id")
+    @Mapping("id")
+    private long key;
     private String firstName; 
     private String lastName;
     private String address;
@@ -19,8 +25,8 @@ public class PersonVO implements Serializable{
     public static long getSerialversionid() {
         return SERIAL_VERSION_ID;
     }
-    public long getId() {
-        return id;
+    public long getKey() {
+        return key;
     }
     @JsonProperty("first_name")
     public String getFirstName() {
@@ -38,8 +44,8 @@ public class PersonVO implements Serializable{
         return gender;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setKey(long key) {
+        this.key = key;
     }
 
     public void setFirstName(String firstName) {
@@ -62,7 +68,7 @@ public class PersonVO implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + (int) (key ^ (key >>> 32));
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
@@ -79,7 +85,7 @@ public class PersonVO implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         PersonVO other = (PersonVO) obj;
-        if (id != other.id)
+        if (key != other.key)
             return false;
         if (firstName == null) {
             if (other.firstName != null)
