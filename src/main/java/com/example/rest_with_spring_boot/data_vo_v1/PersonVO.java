@@ -2,8 +2,12 @@ package com.example.rest_with_spring_boot.data_vo_v1;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"id", "first_name", "last_name", "gender", "address"})
 public class PersonVO implements Serializable{
-    private static final long serialVersionID = 1L;
+    private static final long SERIAL_VERSION_ID = 1L;
     private long id;
     private String firstName; 
     private String lastName;
@@ -13,20 +17,23 @@ public class PersonVO implements Serializable{
     public PersonVO() {}
 
     public static long getSerialversionid() {
-        return serialVersionID;
+        return SERIAL_VERSION_ID;
     }
     public long getId() {
         return id;
     }
+    @JsonProperty("first_name")
     public String getFirstName() {
         return firstName;
     }
+    @JsonProperty("last_name")
     public String getLastName() {
         return lastName;
     }
     public String getAddress() {
         return address;
     }
+    //@PropertyIgnore
     public String getGender() {
         return gender;
     }

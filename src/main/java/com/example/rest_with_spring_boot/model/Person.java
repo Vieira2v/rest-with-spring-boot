@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="person")
 public class Person implements Serializable{
-    private static final long serialVersionID = 1L;
+    private static final long SERIAL_VERSION_ID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Person implements Serializable{
     public Person() {}
 
     public static long getSerialversionid() {
-        return serialVersionID;
+        return SERIAL_VERSION_ID;
     }
     public long getId() {
         return id;
