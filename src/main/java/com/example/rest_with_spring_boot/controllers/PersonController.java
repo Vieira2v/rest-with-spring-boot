@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rest_with_spring_boot.data_vo_v1.PersonVO;
+import com.example.rest_with_spring_boot.data_vo_v2.PersonVoV2;
 import com.example.rest_with_spring_boot.services.PersonServices;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 
     @Autowired
@@ -35,13 +36,18 @@ public class PersonController {
     }
 
     @PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-    public PersonVO create(@RequestBody PersonVO PersonVO) {
-        return service.create(PersonVO);
+    public PersonVO create(@RequestBody PersonVO person) {
+        return service.create(person);
+    }
+
+    @PostMapping(value="/v2", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+    public PersonVoV2 createV2(@RequestBody PersonVoV2 person) {
+        return service.createV2(person);
     }
 
     @PutMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-    public PersonVO update(@RequestBody PersonVO PersonVO) {
-        return service.update(PersonVO);
+    public PersonVO update(@RequestBody PersonVO person) {
+        return service.update(person);
     }
 
     @DeleteMapping(value="/{id}" )
