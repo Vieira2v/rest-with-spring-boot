@@ -1,0 +1,16 @@
+INSERT INTO books (author, launch_date, price, title) VALUES
+	('Michael C. Feathers', '2017-11-29', 49.00, 'Working effectively code'),
+	('Ralph Johnson', '2017-11-29', 45.00, 'Design Patterns'),
+	('Robert C. Martin', '2009-01-10', 77.00, 'Clean Code'),
+	('Crockford', '2017-11-07', 67.00, 'JavaScript'),
+	('Steve McConnell', '2017-11-07', 58.00, 'Code complete'),
+	('Martin Fowler', '2017-11-07', 88.00, 'Refactoring'),
+	('Eric Freeman', '2017-11-07', 110.00, 'Head First Design'),
+	('Eric Evans', '2017-11-07', 92.00, 'Domain Driven Design'),
+	('Brian Goetz e Tim Peierls', '2017-11-07', 80.00, 'Java Concurrency in Practice'),
+	('Susan Cain', '2017-11-07', 123.00, 'O poder dos quietos'),
+	('Roger Pressman', '2017-11-07', 56.00, 'Engenharia de Software'),
+	('Kenneth Kukier', '2017-11-07', 54.00, 'Big Data'),
+	('Richard Hunter', '2017-11-07', 95.00, 'O verdadeiro valor de TI'),
+	('Marc J. Schiller', '2017-11-07', 45.00, 'Os 11 segredos'),
+	('Aguinaldo Aragon', '2017-11-07', 54.00, 'Implantando a governança de TI');
