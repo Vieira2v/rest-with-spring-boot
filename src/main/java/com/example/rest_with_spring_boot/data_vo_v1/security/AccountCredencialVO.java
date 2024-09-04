@@ -2,14 +2,14 @@ package com.example.rest_with_spring_boot.data_vo_v1.security;
 
 import java.io.Serializable;
 
-public class accountCredencialVO implements Serializable{
+public class AccountCredencialVO implements Serializable{
 
     private static final long SERIAL_VERSION_ID = 1L;
 
     private String username;
     private String password;
 
-    public accountCredencialVO(String username, String password) {
+    public AccountCredencialVO(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -51,7 +51,7 @@ public class accountCredencialVO implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        accountCredencialVO other = (accountCredencialVO) obj;
+        AccountCredencialVO other = (AccountCredencialVO) obj;
         if (username == null) {
             if (other.username != null)
                 return false;

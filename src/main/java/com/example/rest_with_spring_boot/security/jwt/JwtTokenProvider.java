@@ -1,4 +1,4 @@
-package com.example.rest_with_spring_boot.security_jwt;
+package com.example.rest_with_spring_boot.security.jwt;
 
 import java.util.Base64;
 import java.util.Date;
