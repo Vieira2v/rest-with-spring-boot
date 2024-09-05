@@ -87,7 +87,7 @@ public class PersonVoV2 extends RepresentationModel<PersonVoV2> implements Seria
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@SuppressWarnings("null") Object obj) {
         if (this == obj)
             return true;
         if (obj == null)

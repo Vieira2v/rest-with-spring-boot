@@ -77,7 +77,7 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@SuppressWarnings("null") Object obj) {
         if (this == obj)
             return true;
         if (obj == null)

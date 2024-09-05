@@ -68,7 +68,7 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
         return result;
     }
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@SuppressWarnings("null") Object obj) {
         if (this == obj)
             return true;
         if (!super.equals(obj))

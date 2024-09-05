@@ -9,7 +9,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JwtConfigurer {
     
     @Autowired
-    private JwtTokenProvider tokenProvider;
+    private final JwtTokenProvider tokenProvider;
 
     public JwtConfigurer(JwtTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
