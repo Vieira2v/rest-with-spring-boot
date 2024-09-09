@@ -54,6 +54,7 @@ public class User implements UserDetails{
     @JoinTable(name="user_permission", joinColumns={@JoinColumn (name="id_user")},
         inverseJoinColumns = {@JoinColumn (name="id_permission")})
     private List<Permission> permissions;
+    //Esta linha define uma lista de permissões que um User possui. Cada instância da classe User terá um conjunto de permissões relacionadas.
 
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
@@ -61,15 +62,25 @@ public class User implements UserDetails{
             roles.add(permission.getDescription());
         }
         return roles;
+
+        //Esse método transforma a lista de permissões (permissions) em uma lista de "roles" (cargos/funções) que o usuário possui.
     }
 
 
+    //Esse é um construtor padrão da classe User. Ele não faz nada explicitamente, mas é necessário para que o framework (como Hibernate ou JPA) possa criar instâncias de User.
     public User() {}
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.permissions;
+
+        /*É uma interface do Spring Security que representa uma autoridade 
+        concedida a um usuário (como uma permissão ou um papel).
+        return this.permissions;: Aqui, ele está retornando a lista de 
+        permissões do usuário. Provavelmente a classe Permission implementa
+        GrantedAuthority, então as permissões podem ser tratadas 
+        diretamente como autoridades (roles) no Spring Securit */
     }
 
     @Override

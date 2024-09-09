@@ -35,6 +35,15 @@ public class AbstractIntegrationTest {
         public void initialize(ConfigurableApplicationContext applicationContext) {
             startContainers();
             ConfigurableEnvironment environment = applicationContext.getEnvironment();
+            String jdbcUrl = postgresql.getJdbcUrl();
+            String username = postgresql.getUsername();
+            String password = postgresql.getPassword();
+            
+            // Imprima a URL do banco de dados
+            System.out.println("JDBC URL: " + jdbcUrl);
+            System.out.println("Username: " + username);
+            System.out.println("Password: " + password);
+            
             MapPropertySource testcontainers = new MapPropertySource(
                 "testcontainers", 
                 (Map) createConnectionConfiguration());

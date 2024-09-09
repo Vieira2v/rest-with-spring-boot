@@ -46,12 +46,25 @@ public class CustomizedResponseEntityExceptionHandler extends  ResponseEntityExc
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    /*Quando uma InvalidJwtAuthenticationException é lançada, 
+    o Spring a captura e invoca o método 
+    handleInvalidJwtAuthenticationException. */
     @ExceptionHandler(InvalidJwtAuthenticationException.class)
     public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationException(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
             new Date(),
+            /*A data e hora atual em que a exceção ocorreu. 
+            * Isso ajuda a registrar quando o erro aconteceu. */
+
             ex.getMessage(),
+            /*A mensagem da exceção, fornecendo detalhes sobre o motivo da 
+            * falha (por exemplo, "Token inválido ou expirado"). */
+
             request.getDescription(false));
+            /*Descrição detalhada da solicitação que causou o erro. 
+            * O argumento false indica que não deve incluir informações 
+            * sobre o servlet (por exemplo, URL da requisição). */
+
         return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }

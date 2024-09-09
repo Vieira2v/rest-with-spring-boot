@@ -11,6 +11,12 @@ public class InvalidJwtAuthenticationException extends AuthenticationException{
 
     public InvalidJwtAuthenticationException(String ex) {
         super(ex);
+
+        /*O construtor recebe uma mensagem de erro (String ex) e a 
+        * passa para o construtor da superclasse (super(ex)). 
+        * Isso faz com que a exceção leve uma mensagem personalizada sobre 
+        * o erro de autenticação relacionado ao JWT, que pode ser 
+        * registrada ou exibida no log. */
     }
 
 

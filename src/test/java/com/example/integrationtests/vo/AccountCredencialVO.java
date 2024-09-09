@@ -1,14 +1,21 @@
-package com.example.rest_with_spring_boot.data_vo_v1.security;
+package com.example.integrationtests.vo;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class AccountCredencialVO implements Serializable{
 
     private static final long SERIAL_VERSION_ID = 1L;
 
-    
     private String username;
     private String password;
+
+    public AccountCredencialVO(){}
+
 
     public AccountCredencialVO(String username, String password) {
         this.username = username;

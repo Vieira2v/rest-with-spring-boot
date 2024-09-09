@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="Authentication Endpoint")
-@RestController
+@RestController //Define que os métodos dessa classe pode responder a request HTTP e retornar dados em formato JSON ou XML.
 @RequestMapping("/auth")
 public class AuthController {
     
@@ -29,6 +29,9 @@ public class AuthController {
     @Operation(summary="Authenticates a user and returns a token")
     @PostMapping(value="/signin")
     public ResponseEntity signin(@RequestBody AccountCredencialVO data) {
+        /*O método recebe um corpo da requisição 
+        (representado por AccountCredencialVO) e retorna uma resposta HTTP. */
+
         if (checkIfParamsIsNotNull(data)){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
         }
@@ -39,6 +42,10 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!"); 
         }
 
+        /*Este método estou autenticando se o usuário é válido com base
+         * nas credênciais fornecidas e retorna um token.
+         */
+
         return token;
     }
 
@@ -47,6 +54,7 @@ public class AuthController {
 	@PutMapping(value = "/refresh/{username}")
 	public ResponseEntity refreshToken(@PathVariable("username") String username,
 			@RequestHeader("Authorization") String refreshToken) {
+                
 		if (checkIfParamsIsNotNull(username, refreshToken))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
 		var token = authServices.refreshToken(username, refreshToken);

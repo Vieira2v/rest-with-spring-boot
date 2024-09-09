@@ -12,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.configs.TestConfigs;
 import com.example.integrationtests.testscontainers.AbstractIntegrationTest;
+import com.example.integrationtests.vo.AccountCredencialVO;
 import com.example.integrationtests.vo.PersonVO;
+import com.example.rest_with_spring_boot.data_vo_v1.security.TokenVO;
 import com.example.rest_with_spring_boot.Startup;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -41,6 +43,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest{
 		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		
 		person = new PersonVO();
+
 	}
 	
     private void mockPerson() {
@@ -51,17 +54,41 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest{
 	}
 
 	@Test
+	@Order(0)
+	public void authorization() throws JsonMappingException, JsonProcessingException {
+		
+		AccountCredencialVO user = new AccountCredencialVO("leandro", "admin123");
+		
+		System.out.println(new ObjectMapper().writeValueAsString(user));
+    
+		var accessToken = given()
+				.basePath("/auth/signin")
+				.port(TestConfigs.SERVER_PORT)
+				.contentType(TestConfigs.CONTENT_TYPE_JSON)
+				.body(user) // Enviando o objeto user no corpo da requisição
+				.when()
+				.post()
+				.then()
+				.statusCode(200)
+				.extract()
+				.body()
+				.as(TokenVO.class)
+				.getAccessToken();
+
+		
+		specification = new RequestSpecBuilder()
+				.addHeader(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
+				.setBasePath("/api/person/v1")
+				.setPort(TestConfigs.SERVER_PORT)
+					.addFilter(new RequestLoggingFilter(LogDetail.ALL))
+					.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+				.build();
+	}
+
+	@Test
 	@Order(1)
 	public void testCreate() throws JsonMappingException, JsonProcessingException {
 		mockPerson();
-		
-		specification = new RequestSpecBuilder()
-			.addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_EXAMPLE)
-			.setBasePath("/api/person/v1")
-			.setPort(TestConfigs.SERVER_PORT)
-				.addFilter(new RequestLoggingFilter(LogDetail.ALL))
-				.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-			.build();
 		
 		var content = given().spec(specification)
 				.contentType(TestConfigs.CONTENT_TYPE_JSON)
@@ -98,14 +125,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest{
 	public void testCreateWithWrongOrigin() throws JsonMappingException, JsonProcessingException {
 		mockPerson();
 		
-		specification = new RequestSpecBuilder()
-				.addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SEMERU)
-				.setBasePath("/api/person/v1")
-				.setPort(TestConfigs.SERVER_PORT)
-					.addFilter(new RequestLoggingFilter(LogDetail.ALL))
-					.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-				.build();
-		
 		var content = given().spec(specification)
 				.contentType(TestConfigs.CONTENT_TYPE_JSON)
 					.body(person)
@@ -125,14 +144,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest{
 	@Order(3)
 	public void testFindById() throws JsonMappingException, JsonProcessingException {
 		mockPerson();
-		
-		specification = new RequestSpecBuilder()
-			.addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_EXAMPLE)
-			.setBasePath("/api/person/v1")
-			.setPort(TestConfigs.SERVER_PORT)
-				.addFilter(new RequestLoggingFilter(LogDetail.ALL))
-				.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-			.build();
 		
 		var content = given().spec(specification)
 				.contentType(TestConfigs.CONTENT_TYPE_JSON)
@@ -168,14 +179,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest{
 	@Order(4)
 	public void testFindByIdWithWrongOrigin() throws JsonMappingException, JsonProcessingException {
 		mockPerson();
-		
-		specification = new RequestSpecBuilder()
-			.addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SEMERU)
-			.setBasePath("/api/person/v1")
-			.setPort(TestConfigs.SERVER_PORT)
-				.addFilter(new RequestLoggingFilter(LogDetail.ALL))
-				.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-			.build();
 		
 		var content = given().spec(specification)
 				.contentType(TestConfigs.CONTENT_TYPE_JSON)
