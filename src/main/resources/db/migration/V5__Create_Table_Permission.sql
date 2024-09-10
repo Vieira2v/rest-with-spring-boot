@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS permission(
+﻿CREATE TABLE permission(
   id SERIAL PRIMARY KEY NOT NULL,
   description varchar(255)
 );

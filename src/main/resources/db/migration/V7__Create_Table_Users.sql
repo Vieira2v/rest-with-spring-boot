@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS users (
+﻿CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   user_name varchar(255) UNIQUE,
   full_name varchar(255),

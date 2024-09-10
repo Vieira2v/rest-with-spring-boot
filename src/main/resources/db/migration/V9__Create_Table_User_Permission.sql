@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS user_permission (
+﻿CREATE TABLE user_permission (
   id_user BIGINT NOT NULL,
   id_permission BIGINT NOT NULL,
   PRIMARY KEY (id_user, id_permission),

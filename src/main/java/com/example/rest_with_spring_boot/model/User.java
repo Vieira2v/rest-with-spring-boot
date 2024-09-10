@@ -30,7 +30,7 @@ public class User implements UserDetails{
     private Long id;
 
     @Column(name="user_name", unique=true)
-    private String userName;
+    private String username;
 
     @Column(name="full_name", unique=true)
     private String fullName;
@@ -90,7 +90,7 @@ public class User implements UserDetails{
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
 
@@ -134,12 +134,12 @@ public class User implements UserDetails{
 
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
 
@@ -193,7 +193,7 @@ public class User implements UserDetails{
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
         result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + (accountNonExpired ? 1231 : 1237);
@@ -219,10 +219,10 @@ public class User implements UserDetails{
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (userName == null) {
-            if (other.userName != null)
+        if (username == null) {
+            if (other.username != null)
                 return false;
-        } else if (!userName.equals(other.userName))
+        } else if (!username.equals(other.username))
             return false;
         if (fullName == null) {
             if (other.fullName != null)
