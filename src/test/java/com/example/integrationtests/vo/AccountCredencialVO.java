@@ -2,9 +2,7 @@ package com.example.integrationtests.vo;
 
 import java.io.Serializable;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class AccountCredencialVO implements Serializable{
 
     private static final long SERIAL_VERSION_ID = 1L;

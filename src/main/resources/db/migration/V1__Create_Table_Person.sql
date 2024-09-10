@@ -6,6 +6,4 @@ CREATE TABLE public.person (
     address character varying(100) NOT NULL
 );
 
-ALTER TABLE public.person OWNER TO postgres;
-
 
