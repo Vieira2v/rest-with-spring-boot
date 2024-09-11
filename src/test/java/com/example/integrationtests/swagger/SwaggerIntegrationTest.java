@@ -3,6 +3,7 @@ package com.example.integrationtests.swagger;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.configs.TestConfigs;
 import com.example.integrationtests.testscontainers.AbstractIntegrationTest;
@@ -10,6 +11,7 @@ import com.example.rest_with_spring_boot.Startup;
 
 import static io.restassured.RestAssured.given;
 
+@ActiveProfiles("test")
 @SpringBootTest(classes = Startup.class, webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class SwaggerIntegrationTest extends AbstractIntegrationTest{
 

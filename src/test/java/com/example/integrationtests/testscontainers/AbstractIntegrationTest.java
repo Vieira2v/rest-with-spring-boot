@@ -3,7 +3,6 @@ package com.example.integrationtests.testscontainers;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import org.flywaydb.core.Flyway;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -37,7 +36,7 @@ public class AbstractIntegrationTest {
 
         @SuppressWarnings({"unchecked", "rawtypes"})
         @Override
-        public void initialize(ConfigurableApplicationContext applicationContext) {
+        public void initialize(@SuppressWarnings("null") ConfigurableApplicationContext applicationContext) {
             startContainers();
             ConfigurableEnvironment environment = applicationContext.getEnvironment();
             String jdbcUrl = postgresql.getJdbcUrl();
@@ -53,12 +52,6 @@ public class AbstractIntegrationTest {
                 "testcontainers", 
                 (Map) createConnectionConfiguration());
             environment.getPropertySources().addFirst(testcontainers);
-
-            Flyway flyway = Flyway.configure()
-                .dataSource(postgresql.getJdbcUrl(), postgresql.getUsername(), postgresql.getPassword())
-                .locations("classpath:/db/migration") // Certifique-se de que a localização está correta
-                .load();
-            flyway.migrate();
         }
     }
 }

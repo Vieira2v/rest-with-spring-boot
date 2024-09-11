@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class PersonVO implements Serializable{
     private static final long SERIAL_VERSION_ID = 1L;
 
@@ -13,11 +16,11 @@ public class PersonVO implements Serializable{
     private String lastName;
     private String address;
     private String gender;
+    private boolean enabled;
 
     public static long getSerialversionid() {
         return SERIAL_VERSION_ID;
     }
-
     public long getId() {
         return id;
     }
@@ -29,7 +32,6 @@ public class PersonVO implements Serializable{
     public String getLastName() {
         return lastName;
     }
-
     public String getAddress() {
         return address;
     }
@@ -37,27 +39,29 @@ public class PersonVO implements Serializable{
     public String getGender() {
         return gender;
     }
+    public boolean isEnabled() {
+        return enabled;
+    }
 
     public void setId(long id) {
         this.id = id;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
-
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -67,9 +71,9 @@ public class PersonVO implements Serializable{
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+        result = prime * result + (enabled ? 1231 : 1237);
         return result;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -101,6 +105,10 @@ public class PersonVO implements Serializable{
                 return false;
         } else if (!gender.equals(other.gender))
             return false;
+        if (enabled != other.enabled)
+            return false;
         return true;
-    }    
+    }
+
+   
 }

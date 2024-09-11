@@ -18,6 +18,8 @@ import com.example.rest_with_spring_boot.mapper.custom.PersonMapper;
 import com.example.rest_with_spring_boot.model.Person;
 import com.example.rest_with_spring_boot.repositories.PersonRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PersonServices {
     private static final Logger logger = Logger.getLogger(PersonServices.class.getName());
@@ -86,6 +88,19 @@ public class PersonServices {
 
         var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
         vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+        return vo;
+    }
+
+    @Transactional
+    public PersonVO disablePerson(Long id) {
+        logger.info("Disabling one person!");
+
+        repository.disablePerson(id);
+
+        var entity = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+        var vo = DozerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
         return vo;
     }
 

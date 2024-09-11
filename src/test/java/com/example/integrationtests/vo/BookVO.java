@@ -1,5 +1,4 @@
-package com.example.rest_with_spring_boot.data_vo_v1;
-
+package com.example.integrationtests.vo;
 import java.io.Serializable;
 import java.util.Date;
 

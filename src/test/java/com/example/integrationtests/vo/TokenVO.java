@@ -3,7 +3,9 @@ package com.example.integrationtests.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class TokenVO implements Serializable{
 
     private static final long SERIAL_VERSION_ID = 1L;
