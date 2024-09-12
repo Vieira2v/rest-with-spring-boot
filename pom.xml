@@ -150,8 +150,20 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>9.8.1</version> 
+				<configuration>
+					<url>jdbc:postgresql://localhost:5432/rest_with_spring_boot</url>
+					<user>postgres</user>
+					<password>mvx1064@</password>
+            	</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

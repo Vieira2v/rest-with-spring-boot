@@ -10,16 +10,16 @@ security:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${spring.datasource.url} # Usar a variável de ambiente configurada pelo inicializador
+    url: ${spring.datasource.url}
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
 
   flyway:
-    url: ${spring.flyway.url} # Usar a variável de ambiente configurada pelo inicializador
+    url: ${spring.flyway.url}
     user: ${spring.flyway.user}
     password: ${spring.flyway.password}
     enabled: true
-    locations: classpath:/db/migration # Caminho correto para as migrações
+    locations: classpath:/db/migration
 
   jpa:
     open-in-view: false

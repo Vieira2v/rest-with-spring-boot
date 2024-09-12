@@ -126,8 +126,6 @@ public class Person implements Serializable{
                 return false;
         } else if (!gender.equals(other.gender))
             return false;
-        if (enabled != other.enabled)
-            return false;
-        return true;
+        return enabled == other.enabled;
     }
 }

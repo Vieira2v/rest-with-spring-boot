@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -105,9 +104,7 @@ public class PersonVO implements Serializable{
                 return false;
         } else if (!gender.equals(other.gender))
             return false;
-        if (enabled != other.enabled)
-            return false;
-        return true;
+        return enabled == other.enabled;
     }
 
    
