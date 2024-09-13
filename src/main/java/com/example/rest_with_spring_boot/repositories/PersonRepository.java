@@ -9,8 +9,11 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.rest_with_spring_boot.model.Person;
 
+import jakarta.transaction.Transactional;
+
 public interface PersonRepository extends JpaRepository<Person, Long>{
 
+    @Transactional
     @Modifying
     @Query("UPDATE Person p SET p.enabled = false WHERE p.id =:id")
     void disablePerson(@Param("id") long id);

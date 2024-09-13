@@ -1,6 +1,5 @@
 package com.example.rest_with_spring_boot.unittests.mockito.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +38,7 @@ public class BookServicesTest {
     BooksRepository repository;
 
     @BeforeEach
-    void setUpMocks() throws Exception {
+    public void setUpMocks() throws Exception {
         input = new MockBook();
         MockitoAnnotations.openMocks(this);
     }
@@ -61,38 +60,6 @@ public class BookServicesTest {
         assertEquals("Author Test1", result.getAuthor());
         assertEquals(200D, result.getPrice());
         assertNotNull(result.getLaunchDate());
-    }
-
-    @Test
-    void testFindAll() {
-        List<Book> list = input.mockEntityList();
-
-        when(repository.findAll()).thenReturn(list);
-
-        var book = service.findAll();
-
-        assertNotNull(book);
-        assertEquals(14, book.size());
-
-        var bookOne = book.get(1);
-        assertNotNull(bookOne);
-        assertNotNull(bookOne.getKey());
-        assertNotNull(bookOne.getLinks());
-        assertTrue(bookOne.toString().contains("[</api/book/v1/1>;rel=\"self\"]"));
-        assertEquals("Title Test1", bookOne.getTitle());
-        assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals(200D, bookOne.getPrice());
-        assertNotNull(bookOne.getLaunchDate());
-
-        var bookSeven = book.get(7);
-        assertNotNull(bookSeven);
-        assertNotNull(bookSeven.getKey());
-        assertNotNull(bookSeven.getLinks());
-        assertTrue(bookOne.toString().contains("[</api/book/v1/1>;rel=\"self\"]"));
-        assertEquals("Title Test1", bookOne.getTitle());
-        assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals(200D, bookOne.getPrice());
-        assertNotNull(bookOne.getLaunchDate());
     }
 
     @Test

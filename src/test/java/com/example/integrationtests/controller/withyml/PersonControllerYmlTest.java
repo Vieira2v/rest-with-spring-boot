@@ -311,6 +311,43 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest{
 
 	@Test
 	@Order(7)
+	public void testFindByName() throws JsonMappingException, JsonProcessingException {
+		
+		var wrapper = given().spec(specification)
+				.config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs(TestConfigs.CONTENT_TYPE_YML, ContentType.TEXT)))
+				.contentType(TestConfigs.CONTENT_TYPE_YML)
+				.accept(TestConfigs.CONTENT_TYPE_YML)
+				.pathParam("firstName", "be")
+				.queryParams("page", 0, "size", 6, "direction", "asc")
+					.when()
+					.get("findPersonByName/{firstName}")
+				.then()
+					.statusCode(200)
+						.extract()
+						.body()
+							.as(PagedModelPerson.class, objectMapper);
+
+		var people = wrapper.getContent();
+		
+		PersonVO foundPersonOne = people.get(0);
+		
+		assertNotNull(foundPersonOne.getId());
+		assertNotNull(foundPersonOne.getFirstName());
+		assertNotNull(foundPersonOne.getLastName());
+		assertNotNull(foundPersonOne.getAddress());
+		assertNotNull(foundPersonOne.getGender());
+		assertTrue(foundPersonOne.isEnabled());
+		
+		assertEquals(69, foundPersonOne.getId());
+		
+		assertEquals("Abbe", foundPersonOne.getFirstName());
+		assertEquals("Kytley", foundPersonOne.getLastName());
+		assertEquals("69618 Aberg Court", foundPersonOne.getAddress());
+		assertEquals("Male", foundPersonOne.getGender());
+	}
+
+	@Test
+	@Order(7)
 	public void testFindAllWithoutToken() throws JsonMappingException, JsonProcessingException {
 		
 		RequestSpecification specificationWithoutToken = new RequestSpecBuilder()
@@ -329,4 +366,57 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest{
 				.then()
 					.statusCode(403);
 	}
+
+	@Test
+	@Order(8)
+	public void testHATEOAS() throws JsonMappingException, JsonProcessingException {
+		
+		var wrapper = given().spec(specification)
+				.config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs(TestConfigs.CONTENT_TYPE_YML, ContentType.TEXT)))
+				.contentType(TestConfigs.CONTENT_TYPE_YML)
+				.accept(TestConfigs.CONTENT_TYPE_YML)
+				.queryParams("page", 0, "size", 10, "direction", "asc")
+					.when()
+					.get()
+				.then()
+					.statusCode(200)
+						.extract()
+						.body()
+							.asString();
+
+
+		assertTrue(wrapper.contains("""
+                                            links:
+                                            - rel: "first"
+                                              href: "http://localhost:8888/api/person/v1?direction=asc&page=0&size=10&sort=firstName,asc"""));
+		assertTrue(wrapper.contains("""
+                                            - rel: "self"
+                                              href: "http://localhost:8888/api/person/v1?page=0&size=10&direction=asc"""));
+		assertTrue(wrapper.contains("""
+                                            - rel: "next"
+                                              href: "http://localhost:8888/api/person/v1?direction=asc&page=1&size=10&sort=firstName,asc"""));
+		assertTrue(wrapper.contains("""
+                                            - rel: "last"
+                                              href: "http://localhost:8888/api/person/v1?direction=asc&page=15&size=10&sort=firstName,asc"""));									  
+
+
+		assertTrue(wrapper.contains("""
+                                            links:
+                                              - rel: "self"
+                                                href: "http://localhost:8888/api/person/v1/69"""));
+		assertTrue(wrapper.contains("links:\n" +
+						"  - rel: \"self\"\n" +
+						"    href: \"http://localhost:8888/api/person/v1/99"));
+		assertTrue(wrapper.contains(" links:\n" +
+						"  - rel: \"self\"\n" +
+						"    href: \"http://localhost:8888/api/person/v1/10"));
+
+		assertTrue(wrapper.contains("""
+                                            page:
+                                              size: 10
+                                              totalElements: 156
+                                              totalPages: 16
+                                              number: 0"""));
+	}
+
 }
