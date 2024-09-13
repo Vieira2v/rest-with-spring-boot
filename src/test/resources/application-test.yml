@@ -2,6 +2,8 @@ server:
   port: 8888
 cors:
   originPatterns: http://localhost:3000,http://localhost:8080,https://example.com.br
+file:
+  upload-dir: /home/bruno/UploadDir
 security:
   jwt:
     token:
@@ -28,7 +30,13 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format-sql: true   
+        format-sql: true  
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB 
 springdoc:
   pathsToMatch:
     - /auth/**
