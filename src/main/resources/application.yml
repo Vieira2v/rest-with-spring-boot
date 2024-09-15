@@ -1,7 +1,9 @@
+server:
+  port: 80
 cors:
   originPatterns: http://localhost:3000,http://localhost:8080,https://example.com.br
 file:
-  upload-dir: /home/bruno/UploadDir
+  upload-dir: C:/Users/Bruno/Downloads/UploadDir
 security:
   jwt:
     token:

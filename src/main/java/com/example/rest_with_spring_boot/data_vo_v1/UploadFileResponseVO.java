@@ -6,15 +6,15 @@ public class UploadFileResponseVO implements Serializable {
     
     private static final long SERIAL_VERSION_ID = 1L;
 
-    private String fileName;
+    private String filename;
     private String fileDowloadUri;
     private String fileType;
     private long size;
     
     public UploadFileResponseVO(){}
 
-    public UploadFileResponseVO(String fileName, String fileDowloadUri, String fileType, long size) {
-        this.fileName = fileName;
+    public UploadFileResponseVO(String filename, String fileDowloadUri, String fileType, long size) {
+        this.filename = filename;
         this.fileDowloadUri = fileDowloadUri;
         this.fileType = fileType;
         this.size = size;
@@ -24,12 +24,12 @@ public class UploadFileResponseVO implements Serializable {
         return SERIAL_VERSION_ID;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getfilename() {
+        return filename;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setfilename(String filename) {
+        this.filename = filename;
     }
 
     public String getFileDowloadUri() {
