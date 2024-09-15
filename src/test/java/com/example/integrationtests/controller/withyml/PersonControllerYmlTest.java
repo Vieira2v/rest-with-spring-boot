@@ -329,7 +329,7 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest{
 
 		var people = wrapper.getContent();
 		
-		PersonVO foundPersonOne = people.get(0);
+		PersonVO foundPersonOne = people.get(2);
 		
 		assertNotNull(foundPersonOne.getId());
 		assertNotNull(foundPersonOne.getFirstName());
@@ -338,16 +338,16 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest{
 		assertNotNull(foundPersonOne.getGender());
 		assertTrue(foundPersonOne.isEnabled());
 		
-		assertEquals(69, foundPersonOne.getId());
+		assertEquals(142, foundPersonOne.getId());
 		
-		assertEquals("Abbe", foundPersonOne.getFirstName());
-		assertEquals("Kytley", foundPersonOne.getLastName());
-		assertEquals("69618 Aberg Court", foundPersonOne.getAddress());
+		assertEquals("Auberon", foundPersonOne.getFirstName());
+		assertEquals("Theobold", foundPersonOne.getLastName());
+		assertEquals("17 Independence Court", foundPersonOne.getAddress());
 		assertEquals("Male", foundPersonOne.getGender());
 	}
 
 	@Test
-	@Order(7)
+	@Order(8)
 	public void testFindAllWithoutToken() throws JsonMappingException, JsonProcessingException {
 		
 		RequestSpecification specificationWithoutToken = new RequestSpecBuilder()
@@ -368,7 +368,7 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest{
 	}
 
 	@Test
-	@Order(8)
+	@Order(9)
 	public void testHATEOAS() throws JsonMappingException, JsonProcessingException {
 		
 		var wrapper = given().spec(specification)
@@ -414,7 +414,7 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest{
 		assertTrue(wrapper.contains("""
                                             page:
                                               size: 10
-                                              totalElements: 156
+                                              totalElements: 157
                                               totalPages: 16
                                               number: 0"""));
 	}

@@ -1,1 +1,1 @@
-SELECT * FROM flyway_schema_history
+SELECT * FROM person WHERE first_name = 'Abbe'

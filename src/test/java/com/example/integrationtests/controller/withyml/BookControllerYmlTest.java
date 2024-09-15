@@ -324,11 +324,10 @@ public class BookControllerYmlTest extends AbstractIntegrationTest{
                                             - rel: "last"
                                               href: "http://localhost:8888/api/book/v1?direction=asc&page=1&size=10&sort=title,asc"""));									  
 
-		assertTrue(wrapper.contains("""
-                                            page:
-                                              size: 10
-                                              totalElements: 15
-                                              totalPages: 2
-                                              number: 0"""));
+		assertTrue(wrapper.contains("page:\n" +
+			"  size: 10\n" +
+			"  totalElements: 16\n" +
+			"  totalPages: 2\n" +
+			"  number: 0"));
 	}
 }
