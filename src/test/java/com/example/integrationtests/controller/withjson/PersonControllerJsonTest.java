@@ -378,6 +378,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest{
 		assertTrue(content.contains("\"next\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=3&size=10&sort=firstName,asc\"}"));
 		assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=15&size=10&sort=firstName,asc\"}}"));
 
-		assertTrue(content.contains("\"page\":{\"size\":10,\"totalElements\":156,\"totalPages\":16,\"number\":2}}"));
+		assertTrue(content.contains("\"page\":{\"size\":10,\"totalElements\":157,\"totalPages\":16,\"number\":2}}"));
 	}
 }
