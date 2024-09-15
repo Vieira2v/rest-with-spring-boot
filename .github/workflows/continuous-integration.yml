@@ -25,9 +25,15 @@ jobs:
         java-version: '22'
         distribution: 'adopt'
         cache: maven
+
+    - name: Clean previous builds
+      run: mvn clean
         
     - name: Build Application JAR
       run: mvn clean package
+
+    - name: Run tests
+      run: mvn test
 
     - name: Docker Compose Build
       run: docker compose build
